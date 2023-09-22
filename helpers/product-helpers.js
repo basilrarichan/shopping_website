@@ -8,7 +8,7 @@ module.exports={
     addProduct:(product,callback)=>{
         console.log(product);
         db.get().collection('product').insertOne(product).then((data)=>{
-          
+            
             callback(data.insertedId)
            
 
@@ -17,7 +17,9 @@ module.exports={
     getAllproduct:()=>{
         return new Promise(async(resolve,reject)=>{
             let products=db.get().collection(collection.PRODUCT_COLLECTION).find().toArray()
-            resolve(products)
+             resolve(products)
+    
+           
         })
     }
 ,
@@ -29,5 +31,30 @@ deleteProduct:(prodId)=>{
          
        
     })
+},
+getProductDetails:(prodId)=>{
+    return new Promise((resolve,reject)=>{
+        db.get().collection(collection.PRODUCT_COLLECTION).findOne({_id:new ObjectId(prodId)}).then((product)=>{
+            resolve(product)
+        })
+    })
+},
+updateProduct:(prodId,proDetails)=>{
+    return new Promise((resolve,reject)=>{
+        db.get().collection(collection.PRODUCT_COLLECTION).updateOne({_id:new ObjectId(prodId)},{
+            $set:{
+                Name:proDetails.Name,
+                Category:proDetails.Category,
+                Price:proDetails.Price,
+                Description:proDetails.Description,
+                
+
+            }
+        }).then((response)=>{
+                resolve()
+        })
+    })
 }
+
+
 }

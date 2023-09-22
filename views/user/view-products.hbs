@@ -10,8 +10,9 @@
                             style="height: 12rem;">
                         <div class="card-body">
                             <h5 class="card-title">{{this.Name}}</h5>
+                            <p class="card-text">RS.{{this.Price}}</p>
                             <p class="card-text">{{this.Description}}</p>
-                            <a href="#" class="btn btn-primary">Add to cart</a>
+                            <button onclick="addToCart('{{this._id}}')" class="btn btn-primary">Add to cart</button>
                         </div>
                     </div>
                 </div>
